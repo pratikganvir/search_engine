@@ -1,7 +1,13 @@
 module SearchEngine
   module Search
-    mattr_accessor :configuration
+    mattr_accessor :configuration do
+      {
+        :column => nil,
+        :search_limit => nil
+      }
+    end
     mattr_accessor :term
+    mattr_accessor :model_name
 
     def self.configure_search(options)
       self.configuration = options
@@ -10,9 +16,9 @@ module SearchEngine
     def self.search(term)
     	self.term = term
       if self.configuration[:search_limit]
-        self.configuration[:model_class].where(self.like_query).order(self.order_query(term)).limit(self.configuration[:search_limit])
+        self.model_name.where(self.like_query).order(self.order_query(term)).limit(self.configuration[:search_limit])
       else
-        self.configuration[:model_class].where(self.like_query).order(self.order_query(term))
+        self.model_name.where(self.like_query).order(self.order_query(term))
       end
     end
 
