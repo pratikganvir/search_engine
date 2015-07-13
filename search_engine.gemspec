@@ -1,4 +1,5 @@
 Gem::Specification.new do |s|
+  s.authors = "Pratik Ganvir"
   s.name = %q{search_engine}
   s.version = "0.0.0"
   s.date = %q{2015-07-13}
