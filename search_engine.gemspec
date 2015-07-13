@@ -8,4 +8,5 @@ Gem::Specification.new do |s|
     "lib/search_engine.rb"
   ]
   s.require_paths = ["lib"]
+  s.licenses = ["open source"]
 end
