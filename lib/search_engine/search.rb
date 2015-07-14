@@ -15,12 +15,10 @@ module SearchEngine
 
     def self.search(term)
     	self.term = term
-      query = self.configuration[:sql_query] ? self.configuration[:sql_query] : self.like_query
-      if self.configuration[:search_limit]
-        self.model_name.where(query).order(self.order_query(term)).limit(self.configuration[:search_limit])
-      else
-        self.model_name.where(query).order(self.order_query(term))
-      end
+      find_query = self.configuration[:sql_query] ? self.configuration[:sql_query] : self.like_query
+      order_query = self.configuration[:sql_query] ? "" : self.order_query(term)
+      limit_query = self.configuration[:search_limit] ? "LIMIT #{self.configuration[:search_limit]}" : ""
+      self.model_name.find_by_sql(find_query+order_query+limit_query)
     end
 
     def self.like_query
